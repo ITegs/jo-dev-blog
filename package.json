@@ -1,6 +1,7 @@
 {
   "name": "jo-dev-blog",
   "version": "0.1.0",
+  "website": "https://blog.jo-dev.de",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.2",
@@ -34,5 +35,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "react-router-dom": "^6.2.2"
   }
 }
