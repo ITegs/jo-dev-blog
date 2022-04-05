@@ -1,24 +1,25 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Colors } from "../Variables/Colors";
 
-export default function ArticleCard() {
-  let curDate = new Date();
-  curDate = curDate.toLocaleDateString("de-DE");
+export default function ArticleCard(props) {
   return (
     <div style={styles.container}>
-      <h2 style={styles.articleTitle}>Wie findet man gute Beispiel-Texte?</h2>
+      <h2 style={styles.articleTitle}>{props.title}</h2>
       <div style={styles.authDate}>
-        <span style={styles.articleAuthor}>Joe</span>
-        <span style={styles.articleDate}>am {curDate}</span>
+        <span style={styles.articleAuthor}>{props.author}</span>
+        <span style={styles.articleDate}>am {props.date}</span>
       </div>
-      <div style={styles.articleTags}>
-        <span style={styles.articleTag}>#software</span>
-        <span style={styles.articleTag}>#frontend</span>
-        <span style={styles.articleTag}>#react</span>
-      </div>
-      <button style={styles.readMore}>
+      {/* <div style={styles.articleTags}>
+        {props.tags.map((tag) => (
+          <span key={tag} style={styles.articleTag}>
+            {tag}
+          </span>
+        ))}
+      </div> */}
+      <Link style={styles.readMore} to={"/post/" + props.id}>
         <span style={styles.readMoreText}>Mehr lesen</span>
-      </button>
+      </Link>
     </div>
   );
 }
@@ -60,7 +61,6 @@ const styles = {
     color: Colors.text,
     fontSize: "1.0rem",
   },
-
   articleTags: {
     display: "flex",
     flexDirection: "row",
@@ -87,6 +87,7 @@ const styles = {
     marginTop: "1rem",
     marginRight: "1rem",
     alignSelf: "end",
+    textDecoration: "none",
   },
   readMoreText: {
     color: Colors.text,
