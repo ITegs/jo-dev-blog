@@ -10,13 +10,13 @@ export default function ArticleCard(props) {
         <span style={styles.articleAuthor}>{props.author}</span>
         <span style={styles.articleDate}>am {props.date}</span>
       </div>
-      {/* <div style={styles.articleTags}>
+      <div style={styles.articleTags}>
         {props.tags.map((tag) => (
           <span key={tag} style={styles.articleTag}>
             {tag}
           </span>
         ))}
-      </div> */}
+      </div>
       <Link style={styles.readMore} to={"/post/" + props.id}>
         <span style={styles.readMoreText}>Mehr lesen</span>
       </Link>

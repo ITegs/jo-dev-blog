@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import Markdown from "markdown-to-jsx";
+import { CodeBlock, dracula } from "react-code-blocks";
 
 import Footer from "../Components/Footer";
 import Header from "../Components/Header";
@@ -28,6 +30,7 @@ export default function Article(props) {
 
   useEffect(() => {
     fetchArticleData(id).then((data) => {
+      data.Tags = data.Tags.split(",");
       setArticle(data);
     });
   }, []);
@@ -43,14 +46,30 @@ export default function Article(props) {
         </div>
         <h1 style={styles.title}>{article.Title}</h1>
         <div style={styles.articleTags}>
-          <span style={styles.articleTag}>Test</span>
-          <span style={styles.articleTag}>Test</span>
-          <span style={styles.articleTag}>Test</span>
-          <span style={styles.articleTag}>Test</span>
-          <span style={styles.articleTag}>Test</span>
+          {article.Tags.map((tag) => (
+            <span key={tag} style={styles.articleTag}>
+              {tag}
+            </span>
+          ))}
         </div>
       </div>
-      <p style={styles.content}>{article.Content}</p>
+      <Markdown
+        children={article.Content}
+        options={{
+          overrides: {
+            CodeBlock: {
+              component: CodeBlock,
+              props: {
+                theme: dracula,
+                customStyle: styles.code,
+              },
+            },
+          },
+        }}
+        style={styles.content}
+      >
+        {article.Content}
+      </Markdown>
       <Footer />
     </div>
   );
@@ -110,13 +129,15 @@ const styles = {
     color: Colors.text,
     backgroundColor: Colors.accentBackground,
     borderRadius: "1rem",
-    marginLeft: "1rem",
-    marginRight: "1rem",
-    fontSize: "1.5rem",
-    marginBottom: "1rem",
+    margin: "1rem",
     paddingTop: "1rem",
     paddingBottom: "1rem",
     paddingLeft: "2rem",
     paddingRight: "2rem",
+  },
+  code: {
+    maxWidth: "60rem",
+    marginTop: "1em",
+    marginBottom: "1em",
   },
 };

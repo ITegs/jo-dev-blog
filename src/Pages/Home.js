@@ -9,7 +9,7 @@ import { Colors } from "../Variables/Colors";
 const fetchArticles = async () => {
   const response = await fetch("/api/articles.php");
   const data = await response.json();
-  console.log(data);
+  // console.log(data);
   return data;
 };
 
@@ -19,7 +19,7 @@ export default function Home() {
       ID: "0",
       Author: "Joe (Admin)",
       Date: "laden",
-      Tags: [],
+      Tags: "...",
       Title: "Artikel laden...",
       Content: "",
     },
@@ -43,7 +43,7 @@ export default function Home() {
             title={article.Title}
             author={article.Author}
             date={article.Date}
-            tags={article.Tags}
+            tags={article.Tags.split(",")}
           />
         ))}
       </div>
