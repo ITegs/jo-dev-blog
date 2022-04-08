@@ -1,21 +1,29 @@
 import React from "react";
 import { Link } from "react-router-dom";
+
 import { Colors } from "../Variables/Colors";
 
 export default function ArticleCard(props) {
   return (
     <div style={styles.container}>
-      <h2 style={styles.articleTitle}>{props.title}</h2>
-      <div style={styles.authDate}>
-        <span style={styles.articleAuthor}>{props.author}</span>
-        <span style={styles.articleDate}>am {props.date}</span>
-      </div>
-      <div style={styles.articleTags}>
-        {props.tags.map((tag) => (
-          <span key={tag} style={styles.articleTag}>
-            {tag}
-          </span>
-        ))}
+      <img
+        style={styles.titleImage}
+        src={"/img/articles/" + props.id + "/title.png"}
+        alt=""
+      />
+      <div>
+        <h2 style={styles.articleTitle}>{props.title}</h2>
+        <div style={styles.authDate}>
+          <span style={styles.articleAuthor}>{props.author}</span>
+          <span style={styles.articleDate}>am {props.date}</span>
+        </div>
+        <div style={styles.articleTags}>
+          {props.tags.map((tag) => (
+            <span key={tag} style={styles.articleTag}>
+              {tag}
+            </span>
+          ))}
+        </div>
       </div>
       <Link style={styles.readMore} to={"/post/" + props.id}>
         <span style={styles.readMoreText}>Mehr lesen</span>
@@ -26,16 +34,26 @@ export default function ArticleCard(props) {
 
 const styles = {
   container: {
-    width: "85vw",
-    maxWidth: "45rem",
     display: "flex",
-    flexDirection: "column",
+    flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
+    flexWrap: "wrap",
+    width: "85vw",
+    maxWidth: "45rem",
     backgroundColor: Colors.accentBackground,
     padding: "1rem",
     margin: "1rem",
     borderRadius: "1rem",
+  },
+  titleImage: {
+    height: "100%",
+    width: "100%",
+    maxHeight: "25rem",
+    maxWidth: "25rem",
+    borderRadius: "1rem",
+    marginLeft: "1rem",
+    marginRight: "1rem",
   },
   articleTitle: {
     color: Colors.accent1,
@@ -87,6 +105,7 @@ const styles = {
     marginTop: "1rem",
     marginRight: "1rem",
     alignSelf: "end",
+    justifySelf: "right",
     textDecoration: "none",
   },
   readMoreText: {

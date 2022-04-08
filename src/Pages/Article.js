@@ -22,10 +22,10 @@ export default function Article(props) {
   const [article, setArticle] = useState({
     ID: "0",
     Author: "Joe (Admin)",
-    Date: "laden",
+    Date: "schreiben...",
     Tags: [],
-    Title: "Artikel laden...",
-    Content: "",
+    Title: "Nicht gefunden!",
+    Content: "Der gesuchte Artikel existiert (noch) nicht.",
   });
 
   useEffect(() => {
@@ -53,23 +53,30 @@ export default function Article(props) {
           ))}
         </div>
       </div>
-      <Markdown
-        children={article.Content}
-        options={{
-          overrides: {
-            CodeBlock: {
-              component: CodeBlock,
-              props: {
-                theme: dracula,
-                customStyle: styles.code,
+      <div style={styles.content}>
+        <img
+          style={styles.titleImage}
+          src={"/img/articles/" + article.ID + "/title.png"}
+          alt=""
+        />
+        <Markdown
+          children={article.Content}
+          options={{
+            overrides: {
+              CodeBlock: {
+                component: CodeBlock,
+                props: {
+                  theme: dracula,
+                  customStyle: styles.code,
+                },
               },
             },
-          },
-        }}
-        style={styles.content}
-      >
-        {article.Content}
-      </Markdown>
+          }}
+        >
+          {article.Content}
+        </Markdown>
+      </div>
+
       <Footer />
     </div>
   );
@@ -134,6 +141,15 @@ const styles = {
     paddingBottom: "1rem",
     paddingLeft: "2rem",
     paddingRight: "2rem",
+  },
+  titleImage: {
+    objectFit: "cover",
+    width: "100%",
+    maxWidth: "30em",
+    position: "relative",
+    left: "50%",
+    transform: "translateX(-50%)",
+    borderRadius: "10px",
   },
   code: {
     maxWidth: "60rem",
